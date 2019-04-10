@@ -30,7 +30,6 @@ export class PageInfoService {
     this.http.get('https://urku-app.firebaseio.com/team.json')
       .subscribe((resp: any[]) => {
         this.team = resp;
-        console.log(resp);
       });
   }
 
