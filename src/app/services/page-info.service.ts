@@ -10,18 +10,28 @@ export class PageInfoService {
   info: PageInfo = {};
   loaded = false;
 
+  team: any[] = [];
+
   constructor(private http: HttpClient) {
+    this.loadInfo();
+    this.loadTeam();
+  }
 
-    // console.log('PageInfo Service Started');
-
-    // Read JSON File
+  loadInfo() {
     this.http.get('assets/data/pages-data.json')
       .subscribe((resp: PageInfo) => {
         this.loaded = true;
         this.info = resp;
-
-        console.log(resp);
-        // console.log(resp['twitter']);
       });
   }
+
+  loadTeam() {
+    // Read JSON File
+    this.http.get('https://urku-app.firebaseio.com/team.json')
+      .subscribe((resp: any[]) => {
+        this.team = resp;
+        console.log(resp);
+      });
+  }
+
 }
